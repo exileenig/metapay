@@ -10,6 +10,7 @@ import { SellersTab } from "@/components/admin/sellers-tab"
 import { TransactionsTab } from "@/components/admin/transactions-tab"
 import { FeesTab } from "@/components/admin/fees-tab"
 import { PayoutsTab } from "@/components/admin/payouts-tab"
+import { CreateCheckoutTab } from "@/components/admin/create-checkout-tab"
 
 export default function AdminPage() {
   const [adminSecret, setAdminSecret] = useState("")
@@ -104,6 +105,7 @@ export default function AdminPage() {
             <TabsTrigger value="sellers">Sellers</TabsTrigger>
             <TabsTrigger value="transactions">Transactions</TabsTrigger>
             <TabsTrigger value="payouts">Payouts</TabsTrigger>
+            <TabsTrigger value="create">Create Checkout</TabsTrigger>
             <TabsTrigger value="fees">Fee Configuration</TabsTrigger>
           </TabsList>
 
@@ -117,6 +119,10 @@ export default function AdminPage() {
 
           <TabsContent value="payouts">
             <PayoutsTab />
+          </TabsContent>
+
+          <TabsContent value="create">
+            <CreateCheckoutTab />
           </TabsContent>
 
           <TabsContent value="fees">

@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { InvoicesTab } from "@/components/dashboard/invoices-tab"
 import { PayoutsTab } from "@/components/dashboard/payouts-tab"
 import { ProfileTab } from "@/components/dashboard/profile-tab"
+import { CreateCheckoutTab } from "@/components/dashboard/create-checkout-tab"
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -140,10 +141,15 @@ export default function DashboardPage() {
 
         <Tabs defaultValue="invoices" className="space-y-6">
           <TabsList>
+            <TabsTrigger value="create">Create Checkout</TabsTrigger>
             <TabsTrigger value="invoices">Invoices</TabsTrigger>
             <TabsTrigger value="payouts">Payouts</TabsTrigger>
             <TabsTrigger value="profile">Profile</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="create">
+            <CreateCheckoutTab />
+          </TabsContent>
 
           <TabsContent value="invoices">
             <InvoicesTab />

@@ -1,22 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
-
-let supabase: any
-let callSellAuth: any
-let generateApiKey: any
-let generateCouponCode: any
-let MetaPayError: any
-
-try {
-  supabase = require("@/lib/supabase").default
-  callSellAuth = require("@/lib/sellauth").callSellAuth
-  const crypto = require("@/lib/utils/crypto")
-  generateApiKey = crypto.generateApiKey
-  generateCouponCode = crypto.generateCouponCode
-  MetaPayError = require("@/lib/errors").MetaPayError
-} catch (err) {
-  console.error("[v0] Import error:", err)
-}
+import supabase from "@/lib/supabase"
+import { callSellAuth } from "@/lib/sellauth"
+import { generateApiKey, generateCouponCode } from "@/lib/utils/crypto"
 
 const registerSchema = z.object({
   email: z.string().email("Invalid email format"),
@@ -27,14 +13,6 @@ const registerSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
-    if (!supabase || !callSellAuth || !generateApiKey || !generateCouponCode || !MetaPayError) {
-      console.error("[v0] Required modules not loaded")
-      return NextResponse.json(
-        { success: false, error: "Server configuration error. Please contact support." },
-        { status: 500 },
-      )
-    }
-
     console.log("[v0] Registration request received")
 
     const body = await req.json()
